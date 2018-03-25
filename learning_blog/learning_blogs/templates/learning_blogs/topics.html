@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Topics</title>
+</head>
+<body>
+{% extends 'learning_blogs/base.html' %}
+{% block content %}
+    <p>Topics</p>
+    <ul>
+        {% for topic in topics %}
+            <a href="{% url 'learning_blogs:topic' topic.id %}">{{ topic }}</a>
+            <br/>
+        {% empty %}
+            <li>No topic have been added yet.</li>
+        {% endfor %}
+    </ul>
+
+<a href="{% url 'learning_blogs:new_topic' %}">Add a new topic</a>
+
+{% endblock content %}
+
+</body>
+</html>
