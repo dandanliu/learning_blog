@@ -7,19 +7,32 @@
 <body>
 {% extends "learning_blogs/base.html" %}
 
+{% load bootstrap3 %}
+
+{% block header %}
+    <h2><a href="{% url 'learning_blogs:topic' topic.id %}">{{ topic }}</a></h2>
+{% endblock header %}
+
 {% block content %}
 
-    <p><a href="{% url 'learning_blogs:topic' topic.id %}">{{ topic }}</a></p>
+    <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3>
+                    Edit entry:
+                </h3>
+            </div>
+            <div class="panel-body">
+                <form action="{% url 'learning_blogs:edit_entry' entry.id %}" method="post">
 
+                    {% csrf_token %}
+                    {% bootstrap_form form %}
 
-    <p>Edit entry: </p>
-
-    <form action="{% url 'learning_blogs:edit_entry' entry.id %}" method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-
-        <button name="submit">save changes</button>
-    </form>
+                    {% buttons %}
+                        <button name="submit">save changes</button>
+                    {% endbuttons %}
+                </form>
+            </div>
+    </div> <!-- panel -->
 
 {% endblock content %}
 </body>
